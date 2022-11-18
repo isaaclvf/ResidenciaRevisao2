@@ -25,16 +25,57 @@
             }
         }
 
-        public long CPF
+        public void SetCPF(String cpfString)
         {
-            get { return cpf; }
-            set
-            {
-                // Isso não funciona se o primeiro dígito for 0, como resolver?
-                if (value.ToString().Length != 11)
-                    throw new ArgumentException("CPF deve ter exatamente 11 dígitos");
-                cpf = value;
-            }
+            // Validação
+            // 11 dígitos
+            if (cpfString.Length != 11)
+                throw new Exception("CPF deve ter exatamente 11 dígitos");
+
+            /* Os caracteres não podem ser todos iguais
+             * https://stackoverflow.com/questions/16027475/determine-if-all-characters-in-a-string-are-the-same
+             * https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all
+             */
+            if (cpfString.All(digito => digito == cpfString[0]))
+                throw new Exception("Os dígitos do CPF não podem ser todos iguais");
+
+            // Checar primeiro dígito verificador (j)
+            int j = 0;
+            int somaJ = 0;
+            for (int i = 0; i < 9; i++)
+                // https://www.techiedelight.com/convert-char-to-int-csharp/
+                somaJ += (int)Char.GetNumericValue(cpfString[i]) * (10 - i);
+
+            if (!(somaJ % 11 == 0 || somaJ % 11 == 1))
+                j = 11 - (somaJ % 11);
+
+            if ((int)Char.GetNumericValue(cpfString[9]) != j)
+                throw new Exception("CPF inválido");
+
+            // Checar segundo dígito verificador (k)
+            int k = 0;
+            int somaK = 0;
+            for (int i = 0; i < 9; i++)
+                somaK += (int)Char.GetNumericValue(cpfString[i]) * (11 - i);
+
+            if (!(somaK % 11 == 0 || somaK % 11 == 1))
+                k = 11 - (somaK % 11);
+
+            if ((int)Char.GetNumericValue(cpfString[10]) != k)
+                throw new Exception("CPF inválido");
+
+            // Salvar no campo como float
+            cpf = Convert.ToInt64(cpfString);
+        }
+
+        public string GetCPF()
+        {
+            // Preservar zeros à esquerda
+            var CPFString = cpf.ToString();
+
+            if (CPFString.Length == 11) return CPFString;
+
+            return CPFString.PadLeft(11, '0');
         }
 
         public DateTime Nascimento
