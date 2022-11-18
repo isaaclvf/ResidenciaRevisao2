@@ -8,7 +8,7 @@
 
         private readonly string matricula;
 
-        public Aluno(String nome)
+        public Aluno(string nome)
         {
             if (nome == null)
                 throw new Exception("Nome do aluno é obrigatório");
@@ -20,8 +20,8 @@
             matricula = contAlunos.ToString().PadLeft(5, '0');
         }
 
-        public String Nome { get { return nome; } }
+        public string Nome { get { return nome; } }
 
-        public String Matricula { get { return matricula; } }
+        public string Matricula { get { return matricula; } }
     }
 }
