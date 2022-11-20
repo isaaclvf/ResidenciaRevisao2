@@ -12,7 +12,7 @@
 
         private static string? anoAtual;
 
-        private string codigo;
+        private readonly string codigo;
 
         public Turma()
         {
@@ -35,6 +35,8 @@
         }
 
         public string Codigo { get => codigo; }
+
+        public List<Aluno> Alunos { get => alunos; }
 
         public void AddAluno(Aluno aluno)
         {
