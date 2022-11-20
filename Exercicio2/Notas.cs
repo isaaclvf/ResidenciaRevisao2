@@ -27,6 +27,13 @@
             }
         }
 
-        public float NF { get { return (P1 + P2) / 2; } }
+        public float NF 
+        { 
+            get 
+            { 
+                var nota = (P1 + P2) / 2;
+                return (float)Math.Round(nota, 2);
+            } 
+        }
     }
 }
