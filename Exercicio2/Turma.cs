@@ -75,9 +75,15 @@
             var listaAlfabetica = alunos.OrderBy(a => a.Nome).ToList();
 
             foreach (var aluno in listaAlfabetica)
-            {
+                Console.Write(aluno.Nome);
+        }
+
+        public void ImprimirAlunosComNF()
+        {
+            var listaAlfabetica = alunos.OrderBy(a => a.Nome).ToList();
+
+            foreach (var aluno in listaAlfabetica)
                 Console.Write(aluno.Nome + " - " + notas[aluno.Matricula].NF.ToString());
-            }
         }
 
         public void ImprimirEstatisticas()
