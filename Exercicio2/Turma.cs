@@ -34,6 +34,8 @@
             codigo = anoAtual + '.' + contTurmas.ToString().PadLeft(2, '0');
         }
 
+        public string Codigo { get => codigo; }
+
         public void AddAluno(Aluno aluno)
         {
             if (!alunos.Exists(a => aluno.Equals(a)))
