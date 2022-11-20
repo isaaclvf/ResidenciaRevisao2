@@ -23,5 +23,17 @@
         public string Nome { get { return nome; } }
 
         public string Matricula { get { return matricula; } }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Aluno aluno 
+                && this.Matricula == aluno.Matricula
+                && this.Nome == aluno.Nome;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
