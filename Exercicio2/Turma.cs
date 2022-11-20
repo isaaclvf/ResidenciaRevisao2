@@ -104,5 +104,16 @@
                 }
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Turma turma
+                && this.Codigo == turma.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
